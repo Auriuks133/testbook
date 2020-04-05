@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: news
+  labels: {app: news}
+spec:
+  replicas: 1
+  template:
+    metadata: {labels: {app: news}}
+    spec:
+      containers:
+      - name: news
+        image: gcr.io/myproject/news-service:${TAG}
+        command:
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: news-config
+            mountPath: /etc/news/
+            readOnly: true
+      volumes:
+        - name: news-config
+          configMap: { name: news-config }
