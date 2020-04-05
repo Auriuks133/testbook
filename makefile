@@ -5,10 +5,10 @@ test:
 
 
 build:
-	go build -ldflags "-X main.version=$(TAG)" -o news .
+	go build  
 pack: build
-	docker build -t $(TAG) .
+	docker build -t  .
 upload:
-	docker push $(TAG)
+	docker push 
 deploy:
 	envsubst < k8s/deployment.yml | kubectl apply -f -
