@@ -8,3 +8,5 @@ pack: build
    docker build -t gcr.io/myproject/news-service:$(TAG) .
 upload:
    docker push gcr.io/myproject/news-service:$(TAG)
+deploy:
+   envsubst < k8s/deployment.yml | kubectl apply -f -

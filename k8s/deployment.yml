@@ -21,3 +21,15 @@ spec:
       volumes:
         - name: news-config
           configMap: { name: news-config }
+kind: Service
+apiVersion: v1
+metadata:
+  name: news
+spec:
+  type: LoadBalancer
+  selector:
+    app: news
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
